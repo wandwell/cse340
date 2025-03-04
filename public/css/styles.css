@@ -7,9 +7,13 @@
 
 /******* Global Styles ***************/
 :root {
-  --dark-font: #24476b;
-  --primary-color: #75a3d1;
-  --light-font: black;
+  --primary-color: #95d5b2;
+  --dark-font: #423234;
+  --accent-color: #ae221e;
+}
+
+h2, a, li, p{
+  color: var(--dark-font);
 }
 
 /* Header */
@@ -17,7 +21,6 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: var(--dark-font);
 }
 
 #tools a{
@@ -28,19 +31,23 @@ header {
 .siteName a{
   font-size: 2rem;
   text-decoration: none;
+  color: var(--dark-font);
 }
 
 /*Navigation */
 nav ul{
   display: flex;
-  color: white;
   font-size: 1.5rem;
-  background-color: black;
+  background-color: var(--dark-font);
   flex-direction: row;
   justify-content: space-around;
   list-style: none;
   padding-left: 0;
 }
+ nav li{
+  color: var(--primary-color);
+  padding: .5rem;
+ }
 
 /*HomePage */
 
@@ -56,12 +63,12 @@ nav ul{
 }
 
 .vehicleInformation{
-  color: var(--dark-font);
+  color: var(--primary-color);
   position: absolute;
   top: -10%;
   left: 2%;
-  background-color: white;
-  opacity: 75%;
+  background-color: rgba(66, 50, 52, 80%);
+  padding: 5px;
 }
 
 .vehicleInformation ul{
@@ -69,8 +76,14 @@ nav ul{
   padding-left: 0;
 }
 
+.vehicleInformation li{
+  color: var(--primary-color);
+}
+
 #ownToday{
+  color: var(--dark-font);
   background-color: var(--primary-color);
+  font-size: 1.5rem;
   padding: .5rem;
   width: 94%;
   margin: 4px 2%;
@@ -92,8 +105,9 @@ nav ul{
 }
 
 .upgradeImage{
-  background-color: #24476b;
+  background-color: var(--primary-color);
   text-align: center;
+  border: var(--accent-color) 2px solid;
 }
 
 .upgradeImage img{
@@ -102,7 +116,21 @@ nav ul{
   padding: 5px;
 }
 
-@media screen and (min-width: 600px){
+@media screen and (min-width: 760px){
+
+  body{
+    background-image: url('/images/site/small_check.jpg');
+    background-size: cover;
+  }
+
+  #wrapper{
+    margin: 5rem;
+    padding: 1rem;
+    background-color: white;
+    background-image: none;
+    border: var(--accent-color) 5px solid;
+  }
+
   .vehicleInformation{
     top: 12%;
     width: 40%;
