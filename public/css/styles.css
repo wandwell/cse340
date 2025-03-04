@@ -10,9 +10,16 @@
   --primary-color: #95d5b2;
   --dark-font: #423234;
   --accent-color: #ae221e;
+  --heading: "Limelight", sans-serif;
+  --body: "Asap", sans-serif;
 }
 
-h2, a, li, p{
+h1, h2, h3{
+  font-family: var(--heading);
+}
+
+a, li, p{
+  font-family: var(--body);
   color: var(--dark-font);
 }
 
@@ -65,8 +72,9 @@ nav ul{
 .vehicleInformation{
   color: var(--primary-color);
   position: absolute;
-  top: -10%;
+  top: -1%;
   left: 2%;
+  width: 40%;
   background-color: rgba(66, 50, 52, 80%);
   padding: 5px;
 }
@@ -84,7 +92,7 @@ nav ul{
   color: var(--dark-font);
   background-color: var(--primary-color);
   font-size: 1.5rem;
-  padding: .5rem;
+  padding: 5px;
   width: 94%;
   margin: 4px 2%;
 }
@@ -133,7 +141,7 @@ nav ul{
 
   .vehicleInformation{
     top: 12%;
-    width: 40%;
+    width: 60%;
   }
 
   .vehicleInformation h3{
