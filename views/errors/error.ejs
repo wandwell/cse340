@@ -1,0 +1,16 @@
+<!-- content heading--> 
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else {
+        res.redirect('/')
+    } %>
+    
+    
+    <!-- message--> 
+<div id="error-msg">
+    <p><%= message %></p>
+    <img src="/images/site/wrong-way.webp" alt="detour sign">
+</div>
+    
+    
+    
