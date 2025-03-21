@@ -59,6 +59,24 @@ Util.buildClassificationGrid = async function(data){
   }
   return grid
 }
+/* ****************************************
+ * Build detail section for inventory
+ **************************************** */
+Util.buildDetailsSection = async function(data){
+  let details = '<div id="details">'
+  details += '<img src="' + data[0].inv_image 
+  +'" alt="Image of '+ data[0].inv_make + ' ' + data[0].inv_model 
+  +' on CSE Motors" />'
+  details += '<div class="info">'
+  details += `<h2>${data[0].inv_make} ${data[0].inv_model} Details</h2>`
+  details += `<p class=bold>Price: $ ${new Intl.NumberFormat('en-US').format(data[0].inv_price)}</h2>`
+  details += `<p><span class=bold>Color:</span> ${data[0].inv_color}</p>`
+  details += `<p><span class=bold>Mileage: </span>${new Intl.NumberFormat('en-US').format(data[0].inv_miles)}</p>`
+  details += `<p><span class=bold>Description: </span>${data[0].inv_description}</p>`
+  details += '</div></div>'
+  return details
+}
+
 
 /* ****************************************
  * Middleware For Handling Errors
