@@ -1,5 +1,6 @@
 const utilities = require("../utilities/")
 const baseController = {}
+require("dotenv").config()
 
 baseController.buildHome = async function(req, res){
   const nav = await utilities.getNav()

@@ -16,7 +16,7 @@ invCont.buildByClassificationId = async function (req, res, next) {
     title: className + " vehicles",
     nav,
     grid,
-  })
+   })
 }
 /* ***************************
  *  Build inventory by Detail view
