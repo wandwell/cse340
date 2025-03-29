@@ -1,0 +1,42 @@
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else {
+        res.redirect('/')
+    } %>
+    
+    
+    <!-- message--> 
+    <%- messages() %>
+
+    <% if (errors) { %>
+      <ul class="notice">
+     <% errors.array().forEach(error => { %>
+       <li><%= error.msg %></li>
+    <%  }) %>
+     </ul>
+    <% } %>
+
+    <!-- add inventory form-->
+     <form action="/inv/add-inventory" method="post">
+        <label for="inv_make">Make: </label>
+        <input name="inv_make" type="text" required pattern="^[a-zA-Z0-9]+$" value="<%= locals.inv_make%>">
+        <label for="inv_model">Model: </label>
+        <input name="inv_model" type="text" required pattern="^[a-zA-Z0-9]+$" value="<%= locals.inv_model%>">
+        <label for="inv_year">Year: </label>
+        <input name="inv_year" type="text" required pattern="^\d{4}$" value="<%= locals.inv_year%>">
+        <label for="inv_description">Description: </label>
+        <input name="inv_description" type="text" required value="<%= locals.inv_description%>">
+        <label for="inv_image">Image URL: </label>
+        <input name="inv_image" type="text" value="<%= locals.inv_image%>">
+        <label for="inv_thumbnail">Thumbnail URL: </label>
+        <input name="inv_thumbnail" type="text" value="<%= locals.inv_thumbnail%>">
+        <label for="inv_price">Price: $ </label>
+        <input name="inv_price" type="number" required value="<%= locals.inv_price%>">
+        <label for="inv_miles">Miles: </label>
+        <input name="inv_miles" type="number" required value="<%= locals.inv_miles%>">
+        <label for="inv_color">Color: </label>
+        <input name="inv_color" type="text" required value="<%= locals.inv_color%>">
+        <label for="classification_id">Classification: </label>
+        <%- classificationList %>
+        <button type="submit" class="formButton">Add to Inventory</button>
+     </form>
