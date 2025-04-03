@@ -107,6 +107,16 @@ async function updateInventory(
   }
 }
 
+async function deleteInventory(inv_id){
+  try {
+    const sql = "DELETE FROM inventory WHERE inv_id = $1"
+    const data = await pool.query(sql, [inv_id])
+    return data
+  } catch (error) {
+    new Error("Delete Inventory Error")
+  }
+}
+
 async function checkExistingClass(classification_name){
   try {
     const sql = "SELECT * FROM classification WHERE classification_name = $1"
@@ -118,4 +128,4 @@ async function checkExistingClass(classification_name){
 }
 
 
-module.exports = { updateInventory, addInventory, checkExistingClass, getClassifications, getInventoryByClassificationId, getInventoryById, addClassification};
+module.exports = { deleteInventory, updateInventory, addInventory, checkExistingClass, getClassifications, getInventoryByClassificationId, getInventoryById, addClassification};

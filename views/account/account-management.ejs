@@ -16,3 +16,19 @@
       <%  }) %>
        </ul>
       <% } %>
+
+    <!-- Greeting-->
+    <h2> Welcome <%- locals.accountData.account_firstname %></h2>
+
+    <% if (locals.accountData.account_type === 'Admin' 
+    || locals.accountData.account_type === 'Employee') { %>
+        <div>
+            <h3>Inventory Management</h3>
+            <a href="/inv/management">Click Here</a>
+        </div>
+    <% } %>
+
+    <a href="/account/update">Update Account Information</a>
+    
+
+    

@@ -118,7 +118,7 @@ Util.checkJWTToken = (req, res, next) => {
      next()
     })
   } else {
-   next()
+    next()
   }
  }
 
@@ -130,6 +130,18 @@ Util.checkLogin = (req, res, next) => {
     next()
   } else {
     req.flash("notice", "Please log in.")
+    return res.redirect("/account/login")
+  }
+}
+
+/* ****************************************
+ *  Check Account Type
+ * ************************************ */
+Util.checkAccountType = (req, res, next) => {
+  if (res.locals.accountData.account_type === 'Admin' || res.locals.accountData.account_type === 'Employee'){
+    next()
+  } else {
+    req.flash("notice", "Please log in as an Employee or Admin.")
     return res.redirect("/account/login")
   }
 }

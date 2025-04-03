@@ -11,38 +11,78 @@ router.get("/type/:classificationId", utilities.handleErrors(invController.build
 router.get("/detail/:inventoryId", utilities.handleErrors(invController.getInventoryDetail));
 
 // inventory management routes
-router.get("/management", utilities.handleErrors(invController.buildManagementView))
+router.get(
+    "/management", 
+    utilities.checkLogin, 
+    utilities.checkAccountType, 
+    utilities.handleErrors(invController.buildManagementView))
 
-router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
+router.get(
+    "/getInventory/:classification_id", 
+    utilities.checkLogin,
+    utilities.checkAccountType, 
+    utilities.handleErrors(invController.getInventoryJSON))
 
 //add classification routes
-router.get("/add-classification", utilities.handleErrors(invController.buildAddClassification))
+router.get(
+    "/add-classification", 
+    utilities.checkLogin,
+    utilities.checkAccountType, 
+    utilities.handleErrors(invController.buildAddClassification))
 
 router.post(
     "/add-classification",
     validate.classificationRules(),
     validate.checkClassData,
+    utilities.checkLogin,
+    utilities.checkAccountType,
     utilities.handleErrors(invController.addClassification)
 )
 
 // add inventory routes
-router.get("/add-inventory", utilities.handleErrors(invController.buildAddInventoryView))
+router.get(
+    "/add-inventory", 
+    utilities.checkLogin,
+    utilities.checkAccountType, 
+    utilities.handleErrors(invController.buildAddInventoryView))
 
 router.post(
     "/add-inventory",
     validate.invRules(),
     validate.checkInvData,
+    utilities.checkLogin,
+    utilities.checkAccountType,
     utilities.handleErrors(invController.addInventory)
 )
 
 // edit inventory routes
-router.get("/edit/:inventory_id", utilities.handleErrors(invController.buildEditInventoryView))
+router.get(
+    "/edit/:inventory_id",
+    utilities.checkLogin,
+    utilities.checkAccountType, 
+    utilities.handleErrors(invController.buildEditInventoryView))
 
 router.post(
     "/update",
     validate.invRules(),
     validate.checkUpdateData,
+    utilities.checkLogin,
+    utilities.checkAccountType,
     utilities.handleErrors(invController.updateInventory)
+)
+
+// delete inventory routes
+router.get(
+    '/delete/:inventory_id', 
+    utilities.checkLogin,
+    utilities.checkAccountType, 
+    utilities.handleErrors(invController.buildDeleteInventoryView))
+
+router. post(
+    "/delete",
+    utilities.checkLogin,
+    utilities.checkAccountType,
+    utilities.handleErrors(invController.deleteInventory)
 )
 
 module.exports = router;
