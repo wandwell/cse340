@@ -74,10 +74,7 @@ invCont.addClassification = async function(req, res, next) {
 
   if (regResult) {
     req.flash("notice", `Congratulations, you've add the classification ${classification_name}.`)
-    res.status(201).render("inventory/add-classification", {
-        title: "Add Classification",
-        nav,
-    }) 
+    res.redirect("inv/management") 
   }else {
     req.flash("notice", "Sorry, we were unable to add the classification.")
     res.status(501).render("inventory/add-classification", {

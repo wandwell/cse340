@@ -206,11 +206,7 @@ async function changePassword(req, res) {
 
     if (updateResult) {
         req.flash("notice", `Congratulations, you've change your password`)
-        res.status(201).render("account/account-managment", {
-            title: "Account Management",
-            nav,
-            errors: null
-        }) 
+        res.redirect("account/") 
     }else {
         req.flash("notice", "Sorry, the password change failed.")
         res.status(501).render("account/update", {
@@ -226,7 +222,7 @@ async function changePassword(req, res) {
  * ************************************ */
 async function logout(req, res, next) {
     res.clearCookie("jwt");
-    res.redirect("./");
+    res.redirect("/");
 }
 
 
