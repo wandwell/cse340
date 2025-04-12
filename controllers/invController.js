@@ -7,11 +7,12 @@ const invCont = {}
  *  Build inventory by classification view
  * ************************** */
 invCont.buildByClassificationId = async function (req, res, next) {
+  let nav = await utilities.getNav()
   const classification_id = req.params.classificationId
   const data = await invModel.getInventoryByClassificationId(classification_id)
   const grid = await utilities.buildClassificationGrid(data)
-  let nav = await utilities.getNav()
-  const className = data[0].classification_name
+  const classNameData = await invModel.getClassificationById(classification_id)
+  const className = classNameData[0].classification_name
   res.render("./inventory/classification", {
     title: className + " vehicles",
     nav,
@@ -149,8 +150,21 @@ invCont.addInventory = async function(req, res) {
 invCont.getInventoryJSON = async (req, res, next) => {
   const classification_id = parseInt(req.params.classification_id)
   const invData = await invModel.getInventoryByClassificationId(classification_id)
-  if (invData[0].inv_id) {
+  if (invData[0] != []) {
     return res.json(invData)
+  } else {
+    next(new Error("No data returned"))
+  }
+}
+
+/* ***************************
+ *  Return Classification Name As JSON
+ * ************************** */
+invCont.getClassJSON = async (req, res, next) => {
+  const classification_id = parseInt(req.params.classification_id)
+  const classData = await invModel.getClassificationById(classification_id)
+  if (classData[0] != []) {
+    return res.json(classData)
   } else {
     next(new Error("No data returned"))
   }
@@ -286,6 +300,41 @@ invCont.deleteInventory = async(req, res) => {
       inv_model,
       inv_year,
       inv_price,
+    })
+  }
+}
+
+invCont.buildDeleteClassificationView = async(req, res, next) => {
+  let nav = await utilities.getNav()
+  const classificationList = await utilities.buildClassificationList()
+  res.render("inventory/delete-classification", {
+    title: "Delete Classification",
+    nav,
+    classificationList,
+    errors: null,
+  })
+}
+
+invCont.deleteClassification = async(req, res) => {
+  let nav = await utilities.getNav()
+  const { 
+    classification_id, 
+    classification_name} = req.body
+  
+  const deleteResult = await invModel.deleteClassification(classification_id)
+
+  if (deleteResult) {
+    req.flash("notice", `The ${classification_name} classification was successfully deleted.`)
+    res.redirect("/inv/management")
+  }else {
+    req.flash("notice", "Sorry, we were unable to delete " + classification_name)
+    const classificationList = await utilities.buildClassificationList(classification_id)
+    res.status(501).render("inventory/delete-confirm", {
+      title: "Delete " + itemName,
+      nav,
+      errors: null,
+      classificationList,
+      classification_name
     })
   }
 }

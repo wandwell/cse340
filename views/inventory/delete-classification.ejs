@@ -1,0 +1,31 @@
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else {
+        res.redirect('/')
+    } %>
+    
+    
+    <!-- message--> 
+    <%- messages() %>
+
+    <% if (errors) { %>
+      <ul class="notice">
+     <% errors.array().forEach(error => { %>
+       <li><%= error.msg %></li>
+    <%  }) %>
+     </ul>
+    <% } %>
+
+    <form action="/inv/delete-classification" method="post">
+        <label for="classification_id">Classification: </label>
+        <%- classificationList %>
+        <button type="submit" class="formButton">Delete Classification</button>
+        <input type="hidden" id="classification_name" name="classification_name" value="<%= locals.classification_name %>">
+        <p>Confirm Deletion - The delete is permanent.</p>
+        <p>Note: All items associated with this classification will also be deleted.</p>
+        <ul id="classificationInventoryDisplay"></ul>
+    </form>
+    
+    <noscript>JavaScript must be enabled to use this page.</noscript>
+
+    <script src="/js/del-classification.js"></script>

@@ -23,6 +23,12 @@ router.get(
     utilities.checkAccountType, 
     utilities.handleErrors(invController.getInventoryJSON))
 
+router.get(
+    "/getClass/:classification_id", 
+    utilities.checkLogin,
+    utilities.checkAccountType, 
+    utilities.handleErrors(invController.getClassJSON))
+
 //add classification routes
 router.get(
     "/add-classification", 
@@ -83,6 +89,20 @@ router. post(
     utilities.checkLogin,
     utilities.checkAccountType,
     utilities.handleErrors(invController.deleteInventory)
+)
+
+//delete classification routes
+router.get(
+    '/delete-classification', 
+    utilities.checkLogin,
+    utilities.checkAccountType, 
+    utilities.handleErrors(invController.buildDeleteClassificationView))
+
+router.post(
+    '/delete-classification',
+    utilities.checkLogin,
+    utilities.checkAccountType,
+    utilities.handleErrors(invController.deleteClassification)
 )
 
 module.exports = router;

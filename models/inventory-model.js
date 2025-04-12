@@ -38,6 +38,18 @@ async function getInventoryById(inventory_id){
     console.error("getInventoryById error " + error)
 }}
 
+async function getClassificationById(classification_id){
+  try{
+    const data = await pool.query(
+      `SELECT classification_name From public.classification
+      WHERE classification_id = $1`,
+      [classification_id]
+    )
+    return data.rows
+  } catch (error) {
+    console.error("getInventoryById error " + error)
+}}
+
 async function addClassification(classification_name){
   try{
     const sql = "INSERT INTO classification (classification_name) VALUES ($1) RETURNING *"
@@ -127,5 +139,14 @@ async function checkExistingClass(classification_name){
   }
 }
 
+async function deleteClassification(classification_id){
+  try {
+    const sql = "DELETE FROM classification WHERE classification_id = $1"
+    const data = await pool.query(sql, [classification_id])
+    return data
+  } catch (error) {
+    new Error("Delete Classification Error")
+  }
+}
 
-module.exports = { deleteInventory, updateInventory, addInventory, checkExistingClass, getClassifications, getInventoryByClassificationId, getInventoryById, addClassification};
+module.exports = { deleteClassification, getClassificationById, deleteInventory, updateInventory, addInventory, checkExistingClass, getClassifications, getInventoryByClassificationId, getInventoryById, addClassification};
